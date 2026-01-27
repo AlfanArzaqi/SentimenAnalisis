@@ -1,14 +1,16 @@
 # Sentiment Analysis Pipeline
 
-A comprehensive sentiment analysis pipeline that implements data scraping from Google Play Store, preprocessing, model training with three different algorithms, and detailed evaluation metrics.
+A comprehensive sentiment analysis pipeline for **Indonesian language** that implements data scraping from Google Play Store, context-based sentiment labeling, preprocessing, model training with three different algorithms, and detailed evaluation metrics with wordcloud visualizations.
 
 ## Overview
 
 This project provides a complete end-to-end sentiment analysis workflow that:
-- Scrapes data from Google Play Store reviews
-- Performs comprehensive preprocessing and cleaning
+- Scrapes **Indonesian language** data from Google Play Store reviews
+- Uses **context-based sentiment labeling** algorithm (analyzes sentence structure, keywords, and context instead of ratings)
+- Performs comprehensive preprocessing and cleaning with Indonesian stopwords
 - Trains three different models: Logistic Regression with TF-IDF, LSTM with Word2Vec, and CNN with Bag of Words
 - Evaluates models with detailed metrics and visualizations
+- Generates **WordCloud visualizations** for each sentiment category
 - Performs inference on unseen data
 - Provides model performance analysis and recommendations
 
@@ -17,16 +19,22 @@ This project provides a complete end-to-end sentiment analysis workflow that:
 ## Features
 
 ### 1. Data Scraping
-- **Play Store Reviews**: Using `google-play-scraper` to extract app reviews with ratings
+- **Indonesian Play Store Reviews**: Using `google-play-scraper` to extract Indonesian app reviews with ratings
+- Language: Indonesian (`id`)
+- Country: Indonesia (`id`)
 
 ### 2. Preprocessing and Cleaning
 - Deduplication and null value removal
 - Special character and numeric value removal
 - URL, mention, and hashtag cleaning
-- Stopword removal
+- **Indonesian stopword removal** (with English support for mixed language)
 - Tokenization
 - Stemming and lemmatization
-- Sentiment labeling (negative, neutral, positive)
+- **Context-based sentiment labeling** (negative, neutral, positive)
+  - Uses Indonesian sentiment lexicon (positive/negative keywords)
+  - Analyzes sentence structure and context
+  - Handles negation words and intensifiers
+  - **Does NOT rely on rating scores** for labeling
 
 ### 3. Model Training
 Three different algorithms trained on the Play Store dataset:
@@ -53,6 +61,7 @@ Three different algorithms trained on the Play Store dataset:
 - **F1-Score**: Harmonic mean of precision and recall
 - **Confusion Matrix**: Visual representation of predictions
 - **Training History**: Accuracy and loss curves for deep learning models
+- **WordCloud**: Visual representation of word distribution for each sentiment category
 
 ### 5. Inference
 - Testing on unseen data
@@ -141,6 +150,22 @@ The notebook trains 3 models on Play Store review data and provides comprehensiv
 
 ## Customization
 
+### Context-Based Sentiment Labeling
+
+This project uses a **context-based sentiment labeling algorithm** instead of relying on rating scores. The algorithm:
+
+1. **Lexicon-Based Analysis**: Uses Indonesian sentiment lexicons containing positive and negative keywords
+2. **Negation Handling**: Detects negation words (e.g., "tidak", "bukan") that flip sentiment
+3. **Intensifier Detection**: Identifies intensifying words (e.g., "sangat", "banget") that strengthen sentiment
+4. **Context Awareness**: Analyzes word sequences and their relationships
+5. **Ratio-Based Classification**: Calculates positive/negative word ratios for final classification
+
+**Why Context-Based?**
+- Rating scores may not accurately reflect the actual sentiment expressed in text
+- Users might give high ratings but write negative comments (or vice versa)
+- Text analysis provides more accurate sentiment based on actual content
+- Better captures nuanced opinions and mixed sentiments
+
 ### Using Different Data Sources
 - Modify the scraping functions in Section 1
 - Adjust sample counts and parameters
@@ -173,6 +198,7 @@ Key dependencies:
 - `tensorflow`, `keras`: Deep learning models
 - `nltk`, `gensim`: NLP preprocessing and embeddings
 - `matplotlib`, `seaborn`: Visualization
+- `wordcloud`: WordCloud generation for sentiment analysis
 
 See `requirements.txt` for complete list with versions.
 
