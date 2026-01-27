@@ -1,25 +1,23 @@
 # Sentiment Analysis Pipeline
 
-A comprehensive sentiment analysis pipeline that implements data scraping from multiple sources, preprocessing, model training with three different algorithms, and detailed evaluation metrics.
+A comprehensive sentiment analysis pipeline that implements data scraping from Google Play Store, preprocessing, model training with three different algorithms, and detailed evaluation metrics.
 
 ## Overview
 
 This project provides a complete end-to-end sentiment analysis workflow that:
-- Scrapes data from three sources: Google Play Store reviews, Twitter tweets, and e-commerce product comments
+- Scrapes data from Google Play Store reviews
 - Performs comprehensive preprocessing and cleaning
 - Trains three different models: Logistic Regression with TF-IDF, LSTM with Word2Vec, and CNN with Bag of Words
 - Evaluates models with detailed metrics and visualizations
 - Performs inference on unseen data
-- Provides comparative analysis and recommendations
+- Provides model performance analysis and recommendations
 
 **Performance Target**: Achieve >85% accuracy across all models, with at least one model exceeding 92%
 
 ## Features
 
 ### 1. Data Scraping
-- **Playstore Reviews**: Using `google-play-scraper` to extract app reviews with ratings
-- **Twitter Tweets**: Using `tweepy` API to collect tweets with sentiment-specific hashtags
-- **E-commerce Comments**: Using `beautifulsoup4` to scrape product reviews from e-commerce websites
+- **Play Store Reviews**: Using `google-play-scraper` to extract app reviews with ratings
 
 ### 2. Preprocessing and Cleaning
 - Deduplication and null value removal
@@ -31,7 +29,7 @@ This project provides a complete end-to-end sentiment analysis workflow that:
 - Sentiment labeling (negative, neutral, positive)
 
 ### 3. Model Training
-Three different algorithms trained on each dataset:
+Three different algorithms trained on the Play Store dataset:
 
 #### Logistic Regression with TF-IDF
 - Fast and interpretable baseline model
@@ -86,14 +84,6 @@ cd SentimenAnalisis
 pip install -r requirements.txt
 ```
 
-3. (Optional) For Twitter scraping, set up API credentials:
-```bash
-export TWITTER_API_KEY="your_api_key"
-export TWITTER_API_SECRET="your_api_secret"
-export TWITTER_ACCESS_TOKEN="your_access_token"
-export TWITTER_ACCESS_SECRET="your_access_secret"
-```
-
 ## Usage
 
 1. Open the Jupyter notebook:
@@ -102,12 +92,12 @@ jupyter notebook sentiment_analysis_pipeline.ipynb
 ```
 
 2. Run all cells sequentially or execute specific sections:
-   - **Section 1**: Data Scraping
+   - **Section 1**: Data Scraping from Play Store
    - **Section 2**: Preprocessing and Cleaning
    - **Section 3**: Model Training
    - **Section 4**: Evaluation and Visualization
    - **Section 5**: Inference
-   - **Section 6**: Comparison and Recommendations
+   - **Section 6**: Model Performance Analysis and Recommendations
 
 3. All generated files will be saved in the `data/` directory:
    - Raw datasets (CSV files)
@@ -124,12 +114,8 @@ SentimenAnalisis/
 ├── requirements.txt                   # Python dependencies
 ├── README.md                          # This file
 └── data/                             # Generated data and results (created on first run)
-    ├── playstore_reviews.csv         # Raw Playstore data
-    ├── twitter_tweets.csv            # Raw Twitter data
-    ├── ecommerce_comments.csv        # Raw E-commerce data
-    ├── playstore_cleaned.csv         # Preprocessed Playstore data
-    ├── twitter_cleaned.csv           # Preprocessed Twitter data
-    ├── ecommerce_cleaned.csv         # Preprocessed E-commerce data
+    ├── playstore_reviews.csv         # Raw Play Store data
+    ├── playstore_cleaned.csv         # Preprocessed Play Store data
     ├── model_results.csv             # Performance metrics
     ├── confusion_matrix_*.png        # Confusion matrices
     ├── training_history_*.png        # Training progression plots
@@ -140,7 +126,7 @@ SentimenAnalisis/
 
 ## Model Performance
 
-The notebook trains 9 models total (3 algorithms × 3 datasets) and provides comprehensive performance comparison. Results are automatically saved and visualized.
+The notebook trains 3 models on Play Store review data and provides comprehensive performance comparison. Results are automatically saved and visualized.
 
 ### Evaluation Splits
 - Primary split: 80/20 (train/test)
@@ -180,9 +166,8 @@ The notebook trains 9 models total (3 algorithms × 3 datasets) and provides com
 ## Requirements
 
 Key dependencies:
-- `google-play-scraper`: Playstore review scraping
-- `tweepy`: Twitter API access
-- `beautifulsoup4`: Web scraping
+- `google-play-scraper`: Play Store review scraping
+- `beautifulsoup4`: Web scraping utilities
 - `pandas`, `numpy`: Data manipulation
 - `scikit-learn`: Machine learning models and metrics
 - `tensorflow`, `keras`: Deep learning models
@@ -202,7 +187,6 @@ This project is open source and available under the MIT License.
 ## Acknowledgments
 
 - Google Play Scraper for app review collection
-- Twitter API for tweet data
 - scikit-learn and TensorFlow communities
 - NLTK and Gensim for NLP tools
 
